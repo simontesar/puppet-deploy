@@ -46,17 +46,17 @@ define deploy::unzip (
   if $owner != undef {
     exec { "deployunzip_chown_${target}":
       command     => "/bin/chown ${owner} -R ${target}",
-      subscribe   => Exec["untarball_${file}"],
+      subscribe   => Exec["deployunzip_${file}"],
       refreshonly => true,
-      require     => [ Exec["untarball_${file}"] ];
+      require     => [ Exec["deployunzip_${file}"] ];
     }
   }
   if $group != undef {
     exec { "deployunzip_chgrp_${target}":
       command     => "/bin/chgrp ${group} -R ${target}",
-      subscribe   => Exec["untarball_${file}"],
+      subscribe   => Exec["deployunzip_${file}"],
       refreshonly => true,
-      require     => [ Exec["untarball_${file}"] ];
+      require     => [ Exec["deployunzip_${file}"] ];
     }
 
   }
